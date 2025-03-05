@@ -1,0 +1,222 @@
+:root {
+    --clr-primary-blue: hsl(217, 19%, 35%);
+    --clr-accent-blue: hsl(214, 17%, 51%);
+    --clr-neutral-blue: hsl(212, 23%, 69%);
+    --clr-neutral-blue-light: hsl(210, 46%, 95%);
+
+    --ff-primary: 'Manrope', sans-serif;
+}
+
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  /* 2. Remove default margin */
+  * {
+    margin: 0;
+  }
+  
+  body {
+    /* 3. Add accessible line-height */
+    line-height: 1.7;
+    /* 4. Improve text rendering */
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* 5. Improve media defaults */
+  img, picture, video, canvas, svg, ion-icon {
+    display: block;
+    max-width: 100%;
+  }
+  
+  /* 6. Inherit fonts for form controls */
+  input, button, textarea, select {
+    font: inherit;
+  }
+  
+  /* 7. Avoid text overflows */
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  
+  /* 8. Improve line wrapping */
+  p {
+    text-wrap: pretty;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+  }
+
+  /* General Styling */
+
+body {
+    color: var(--clr-accent-blue);
+    font-family: var(--ff-primary);
+    font-size: 93.75%;
+    background-color: var(--clr-neutral-blue-light);
+
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+    margin: auto;
+}
+
+/* Utitlities */
+
+.flex-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.blog {
+    --content-padding: 2.5em;
+    --content-spacing: 1em;
+
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    background-color: white;
+    border-radius: 10px;
+    margin: 2em;
+    max-width: 800px;
+    box-shadow: 6px 6px 5px hsla(0, 0%, 0%, 0.02),
+                25px 25px 20px hsla(0, 0%, 0%, 0.03),
+                100px 100px 80px hsla(0, 0%, 0%, 0.05);
+}
+
+.blog__content {
+    display: grid;
+    gap: var(--content-spacing);
+    padding: var(--content-padding);
+}
+
+.blog__title {
+  font-weight: 900;
+  font-size: clamp(1.25rem, 0.9859rem + 1.1268vw, 2rem);
+  line-height: 1.4;
+  color: var(--clr-primary-blue);
+}
+
+.blog__author {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.blog__author img {
+  border-radius: 50%;
+}
+
+.name {
+  font-weight: 700;
+  color: var(--clr-primary-blue);
+}
+
+.cover-img {
+  overflow: hidden;
+  border-radius: 10px 0 0 10px;
+}
+
+.cover-img img {
+  height: 100%;
+  width: 100%;
+  object-position: center;
+  object-fit: cover;
+  transition: all 0.5s ease;
+}
+
+.share { 
+  position: relative;
+  z-index: 1;
+ }
+
+.share-button {
+  background: var(--clr-neutral-blue-light);
+  padding: 0.5rem;
+  border-radius: 50%;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--clr-primary-blue);
+  transition: all 0.25s ease;
+}
+
+.share-button:hover, .share-button.active {
+  background: var(--clr-primary-blue);
+  color: var(--clr-neutral-blue);
+}
+
+.share-option {
+  /**
+   * variable for transforming `.share-option` box 
+   * without repeating all transform value
+   */
+  --scale: 0;
+  --translateX: -50%;
+  --translateY: 0;
+  
+  background: var(--clr-primary-blue);
+  position: absolute;
+  bottom: calc(100% + 2rem);
+  left:   50%;
+  transform: translate(var(--translateX), var(--translateY)) scale(var(--scale));
+  display:     flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1em 1.5em;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px -5px #0003;
+  transform-origin: bottom;
+  visibility: hidden;
+  transition: all 0.25s ease;
+}
+
+.share-option.active {
+  --scale: 1;
+  visibility: visible;
+}
+
+.share-option::after {
+  content: '';
+  background: var(--clr-primary-blue);
+  width:  20px;
+  height: 20px;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -60%) rotate(45deg);
+}
+
+.share-option span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: var(--clr-neutral-blue);
+  margin-right: 5px;
+}
+
+.share-option ion-icon { 
+  font-size: 1.2rem; 
+  color: var(--clr-neutral-blue-light);
+}
+
+.share-option ion-icon:hover,
+.blog__title:hover,
+.name:hover { filter: invert(1); }
+
+
+@media (max-width: 768px) {
+  .blog {
+    grid-template-columns: 1fr;
+    max-width: 364px;
+    overflow: hidden;
+    --content-padding: 1.875rem;
+    --content-spacing: 1em;
+  }
+
+  .cover-img {
+    border-radius: 0;
+  }
+
+}
